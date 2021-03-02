@@ -12,7 +12,9 @@ The following credential types are supported:
 When run via the agent pre-checkout and pre-exit hook, your builds will check the following Secrets Manager paths:
 
 * `buildkite/{queue_name}/{pipeline_slug}/ssh-private-key`
+* `buildkite/ssh-private-key`
 * `buildkite/{queue_name}/{pipeline_slug}/git-credentials`
+* `buildkite/git-credentials`
 
 Both of these secrets use the `SecretBinary` type.
 
