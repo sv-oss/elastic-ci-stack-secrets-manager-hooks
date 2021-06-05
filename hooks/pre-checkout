@@ -40,7 +40,7 @@ if [ ${#secrets[@]} -eq 0 ] ; then
 fi
 
 # First up we look for ssh keys if the repository is ssh
-if [[ "${BUILDKITE_REPO:-}" =~ ^git || "${BUILDKITE_REPO:-}" =~ ^ssh ]] ; then
+if [[ "${BUILDKITE_REPO:-}" =~ ^git || "${BUILDKITE_REPO:-}" =~ ^ssh || "${BUILDKITE_REPO:-}" == "" ]] ; then
   ssh_key_paths=(
     "${BUILDKITE_SECRETS_PREFIX}/${BUILDKITE_PIPELINE_SLUG}/ssh-private-key"
     "${BUILDKITE_SECRETS_PREFIX}/ssh-private-key"
