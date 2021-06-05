@@ -16,6 +16,10 @@ debug() {
   fi
 }
 
+if [[ "${BUILDKITE_REPO_OVERRIDE:-}" != "" ]]; then
+  export BUILDKITE_REPO="${BUILDKITE_REPO_OVERRIDE}"
+fi
+
 if [[ "${SKIP_CHECKOUT:-}" == "true" ]]; then
   export BUILDKITE_REPO=""
 fi
