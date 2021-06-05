@@ -16,6 +16,10 @@ debug() {
   fi
 }
 
+if [[ "${SKIP_CHECKOUT:-}" == "true" ]]; then
+  export BUILDKITE_REPO=""
+fi
+
 echo "~~~ Loading secrets from AWS Secrets Manager" >&2;
 debug "Searching in prefix ${BUILDKITE_SECRETS_PREFIX} in region ${AWS_DEFAULT_REGION}"
 
@@ -32,7 +36,7 @@ if [ ${#secrets[@]} -eq 0 ] ; then
 fi
 
 # First up we look for ssh keys if the repository is ssh
-if [[ "${BUILDKITE_REPO:-}" =~ ^git ]] ; then
+if [[ "${BUILDKITE_REPO:-}" =~ ^git || "${BUILDKITE_REPO:-}" =~ ^ssh ]] ; then
   ssh_key_paths=(
     "${BUILDKITE_SECRETS_PREFIX}/${BUILDKITE_PIPELINE_SLUG}/ssh-private-key"
     "${BUILDKITE_SECRETS_PREFIX}/ssh-private-key"

@@ -51,7 +51,7 @@ teardown() {
   stub ssh-add \
     "- : cat > $TMP_DIR/ssh-add-input ; echo added ssh key"
 
-  run bash -c "$PWD/hooks/pre-command && $PWD/hooks/pre-exit"
+  run bash -c "$PWD/hooks/pre-checkout  && $PWD/hooks/pre-exit"
 
   assert_success
   assert_output --partial "ssh-agent (pid 93799)"
@@ -73,7 +73,7 @@ teardown() {
     "secretsmanager list-secrets : cat $TMP_DIR/git-credentials-secrets" \
     "secretsmanager get-secret-value --secret-id buildkite/my-queue/my-pipeline/git-credentials --query SecretBinary --output text : echo https://user:password@host/path/to/repo"
 
-  run bash -c "$PWD/hooks/pre-command && $PWD/hooks/pre-exit"
+  run bash -c "$PWD/hooks/pre-checkout && $PWD/hooks/pre-exit"
 
   assert_success
   assert_output --partial "Adding git-credentials"
