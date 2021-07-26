@@ -20,6 +20,10 @@ if [[ "${BUILDKITE_REPO_OVERRIDE:-}" != "" ]]; then
   export BUILDKITE_REPO="${BUILDKITE_REPO_OVERRIDE}"
 fi
 
+if [[ "${BUILDKITE_BRANCH_OVERRIDE:-}" != "" ]]; then
+  export BUILDKITE_BRANCH="${BUILDKITE_BRANCH_OVERRIDE}"
+fi
+
 if [[ "${SKIP_CHECKOUT:-}" == "true" ]]; then
   export BUILDKITE_REPO=""
 fi
